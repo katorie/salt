@@ -1,0 +1,19 @@
+= form_for @shift_request do |f|
+  - if @shift_request.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@shift_request.errors.count, "error")} prohibited this shift_request from being saved:"
+      %ul
+        - @shift_request.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.date_select :date
+    = f.radio_button :slot, 0, checked: false
+    早番
+    = f.radio_button :slot, 1, checked: false
+    遅番
+    = f.radio_button :slot, 2, checked: false
+    泊り
+    = f.text_field :comment, size: 30
+
+  .actions
+    = f.submit 'Save'

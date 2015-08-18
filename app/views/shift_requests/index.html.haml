@@ -1,0 +1,21 @@
+%h1 Listing shift_requests
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @shift_requests.each do |shift_request|
+      %tr
+        %td= shift_request.date
+        %td= shift_request.slot
+        %td= link_to 'Show', shift_request
+        %td= link_to 'Edit', edit_shift_request_path(shift_request)
+        %td= link_to 'Destroy', shift_request, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Shift request', new_shift_request_path

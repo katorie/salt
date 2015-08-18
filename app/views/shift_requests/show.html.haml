@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %strong Date:
+  = @shift_request.date
+%p
+  %strong Slot:
+  = @shift_request.slot
+
+= link_to 'Edit', edit_shift_request_path(@shift_request)
+\|
+= link_to 'Back', shift_requests_path
