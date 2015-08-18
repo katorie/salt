@@ -1,11 +1,17 @@
 %p#notice= notice
 
 %p
+  %strong Name:
+  = @shift_request.member.name
+%p
   %strong Date:
   = @shift_request.date
 %p
   %strong Slot:
   = @shift_request.slot
+%p
+  %strong Comment:
+  = @shift_request.comment
 
 = link_to 'Edit', edit_shift_request_path(@shift_request)
 \|
