@@ -1,11 +1,6 @@
-%p#notice= notice
+%p= @member.name
 
-%p
-  %strong Name:
-  = @member.name
+%p= link_to "シフトを入力する", new_shift_request_path()
 
+%p 入力されたシフト
 = render @shift_requests
-
-= link_to 'Edit', edit_member_path(@member)
-\|
-= link_to 'Back', members_path
