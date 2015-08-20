@@ -14,7 +14,12 @@ class ShiftRequestsController < ApplicationController
 
   # GET /shift_requests/new
   def new
+    @member = Member.find(1)
     @shift_request = ShiftRequest.new
+    today = Date.today
+    @request_month = today.next_month
+    @request_days = @request_month.all_month
+    @request_days.count.times { @member.shift_requests.build }
   end
 
   # GET /shift_requests/1/edit
@@ -24,7 +29,8 @@ class ShiftRequestsController < ApplicationController
   # POST /shift_requests
   # POST /shift_requests.json
   def create
-    @shift_request = ShiftRequest.new(shift_request_params)
+    @member = Member.find(1)
+    @shift_request = ShiftRequest.new
 
     respond_to do |format|
       if @shift_request.save
@@ -69,6 +75,6 @@ class ShiftRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shift_request_params
-      params.require(:shift_request).permit(:slot, :date, :member_id)
+      params.require(:shift_request).permit(:slot, :date, :member_id, :comment)
     end
 end
