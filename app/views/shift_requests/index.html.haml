@@ -1,8 +1,12 @@
-%h1 Listing shift_requests
+%h1 全員のシフト一覧(きっと管理者だけが見る)
 
 %table
   %thead
     %tr
+      %th
+      %th
+      %th
+      %th
       %th
       %th
       %th
@@ -17,7 +21,3 @@
         %td= link_to 'Show', shift_request
         %td= link_to 'Edit', edit_shift_request_path(shift_request)
         %td= link_to 'Destroy', shift_request, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Shift request', new_shift_request_path

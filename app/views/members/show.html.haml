@@ -1,6 +1,6 @@
 %p= @member.name
 
-%p= link_to "シフトを入力する", new_shift_request_path()
+%p= link_to "シフトを入力する(来月)", new_shift_request_path()
 
-%p 入力されたシフト
+%p 入力されたシフトはここで確認↓
 = render @shift_requests
