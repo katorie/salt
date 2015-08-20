@@ -7,9 +7,6 @@
       %th
       %th
       %th
-      %th
-      %th
-      %th
 
   %tbody
     - @shift_requests.each do |shift_request|
@@ -18,6 +15,3 @@
         %td= shift_request.date
         %td= shift_request.slot
         %td= shift_request.comment
-        %td= link_to 'Show', shift_request
-        %td= link_to 'Edit', edit_shift_request_path(shift_request)
-        %td= link_to 'Destroy', shift_request, :method => :delete, :data => { :confirm => 'Are you sure?' }
