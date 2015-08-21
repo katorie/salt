@@ -14,7 +14,7 @@ class ShiftRequestsController < ApplicationController
 
   # GET /shift_requests/new
   def new
-    @member = Member.find(1)
+    @member = Member.find(params[:member_id])
     @shift_request = ShiftRequest.new
     today = Date.today
     @request_month = today.next_month
@@ -29,7 +29,6 @@ class ShiftRequestsController < ApplicationController
   # POST /shift_requests
   # POST /shift_requests.json
   def create
-    @member = Member.find(1)
     @shift_request = ShiftRequest.new
 
     respond_to do |format|
