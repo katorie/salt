@@ -1,6 +1,7 @@
 %p= @member.name
 
-%p= link_to "シフトを申請する(来月)", new_shift_request_path()
+%p= link_to "シフトを申請する(来月)", new_shift_request_path if applied_next_month?(@member)
+%p= link_to "申請したシフトの編集", '#' unless applied_next_month?(@member)
 
-%p 申請されたシフトはこれ
+%p 申請されたシフトの一覧
 = render @shift_requests
