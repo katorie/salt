@@ -5,6 +5,22 @@ class MembersController < ApplicationController
   # GET /members.json
   def index
     @members = Member.all
+
+    if session[:login]
+      @msg = session[:login] + 'でログイン中です'
+      @member = Member.find_by(name: session[:login])
+    end
+
+    if params.key?(:name)
+      member = Member.find_by(name: params[:name])
+      if member
+        session[:login] = params[:name]
+        redirect_to member_path(member.id)
+      else
+        session[:login] = nil
+        @msg = '名前が間違っています'
+      end
+    end
   end
 
   # GET /members/1
@@ -61,6 +77,11 @@ class MembersController < ApplicationController
       format.html { redirect_to members_url, notice: 'Member was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def logout
+    session[:login] = nil
+    redirect_to root_url
   end
 
   private

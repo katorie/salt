@@ -1,9 +1,12 @@
 %p= @member.name
+-if session[:login]
+  = form_tag('/logout') do
+    = submit_tag 'ログアウト'
 
 %p= link_to "シフトを申請する(来月)", new_shift_request_path(member_id: @member.id) if applied_next_month?(@member)
 %p= link_to "申請したシフトの編集", '#' unless applied_next_month?(@member)
 
-%p 申請されたシフトの一覧
+%p 申請したシフトの一覧
 %table
   %thead
     %tr
@@ -16,3 +19,7 @@
         %td= shift_request.date
         %td= shift_request.slot
         %td= shift_request.comment
+
+- if admin?
+  = link_to 'メンバー一覧', members_path
+  = link_to '申請一覧', shift_requests_path

@@ -1,20 +1,30 @@
-%h1 メンバー一覧（管理者だけでいいのかも）
+%p= @msg
+- unless session[:login]
+  = form_tag('/') do
+    = text_field_tag :name
+    = submit_tag 'ログイン'
+- else
+  =link_to 'シフト申請', member_path(@member.id)
+  = form_tag('/logout') do
+    = submit_tag 'ログアウト'
 
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
+- if admin?
+  %h1 メンバー一覧（管理者のみ）
 
-  %tbody
-    - @members.each do |member|
+  %table
+    %thead
       %tr
-        %td= member.name
-        %td= link_to '申請の一覧', member
-        %td= link_to '名前の編集', edit_member_path(member)
-        %td= link_to '削除', member, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %th
+        %th
+        %th
 
-%br
+    %tbody
+      - @members.each do |member|
+        %tr
+          %td= member.name
+          %td= link_to '編集', edit_member_path(member)
+          %td= link_to '削除', member, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-= link_to 'メンバーの追加', new_member_path
+  %br
+
+  = link_to 'メンバーの追加', new_member_path
