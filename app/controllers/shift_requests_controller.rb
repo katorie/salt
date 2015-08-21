@@ -4,7 +4,7 @@ class ShiftRequestsController < ApplicationController
   # GET /shift_requests
   # GET /shift_requests.json
   def index
-    @shift_requests = ShiftRequest.all
+    @shift_requests = ShiftRequest.all.includes(:member)
   end
 
   # GET /shift_requests/1
