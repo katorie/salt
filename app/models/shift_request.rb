@@ -1,7 +1,7 @@
 class ShiftRequest < ActiveRecord::Base
   belongs_to :member
   validates :member_id, presence: true
-  enum slot: %i(morning evening night)
+  enum slot: %i(早番 遅番 泊り)
 
   def slot= value
     if value.kind_of?(String) and value.to_i.to_s == value
@@ -11,8 +11,8 @@ class ShiftRequest < ActiveRecord::Base
     end
   end
 
-  def self.to_csv
-    CSV.generate do |csv|
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
       csv << csv_column_names
       all.each do |shift_request|
         csv << shift_request.csv_column_values

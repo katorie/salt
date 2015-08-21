@@ -1,5 +1,6 @@
 %h1 全員のシフト一覧(きっと管理者だけが見る)
 %p= link_to "CSV download", shift_requests_path(format: "csv")
+%p= link_to "Excel file download", shift_requests_path(format: "xls")
 
 %table
   %thead
