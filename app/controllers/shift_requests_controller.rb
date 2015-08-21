@@ -5,6 +5,11 @@ class ShiftRequestsController < ApplicationController
   # GET /shift_requests.json
   def index
     @shift_requests = ShiftRequest.all.includes(:member)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @shift_requests.to_csv }
+    end
   end
 
   # GET /shift_requests/1
