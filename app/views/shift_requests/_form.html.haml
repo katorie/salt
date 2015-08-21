@@ -13,7 +13,7 @@
     %thead
       %tr
         %th 日付
-        %th 曜日
+        /%th 曜日
         %th 早番
         %th 遅番
         %th 泊り
@@ -24,7 +24,7 @@
           - shift_request_form.text_field :member_id, value: @member.id
           - request_day = @request_days.to_a[shift_request_form.index]
           %td= shift_request_form.date_field :date, value: request_day, readonly: true
-          %td= request_day.strftime("#{%w(日 月 火 水 木 金 土)[request_day.wday]}")
+          /%td= request_day.strftime("#{%w(日 月 火 水 木 金 土)[request_day.wday]}")
           %td= shift_request_form.radio_button :slot, 0
           %td= shift_request_form.radio_button :slot, 1
           %td= shift_request_form.radio_button :slot, 2
