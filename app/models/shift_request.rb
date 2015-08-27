@@ -1,6 +1,7 @@
 class ShiftRequest < ActiveRecord::Base
   belongs_to :member
   validates :member_id, presence: true
+  validates :comment, length: {maximum: 20 }
   enum slot: %i(早番 遅番 泊り)
 
   def slot= value
