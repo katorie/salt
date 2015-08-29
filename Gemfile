@@ -47,3 +47,16 @@ group :development, :test do
   gem 'factory_girl_rails'
 end
 
+# source 'https://rails-assets.org'
+# gem 'rails-assets-bootstrap', "= 3.0.3"
+
+gem 'react-rails', '~> 1.1.0'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-react-bootstrap'
+#   gem 'rails-assets-eventEmitter'
+#   gem 'rails-assets-immutable'
+end
+
+#NOTE some cuke features fail with 3.3.4.1
+gem "bootstrap-sass", '3.3.3'
