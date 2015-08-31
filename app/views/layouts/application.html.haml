@@ -1,0 +1,17 @@
+!!! 5
+%html
+%head
+  %meta{:charset => "UTF-8"}
+  %title Salt
+  = stylesheet_link_tag "application", media: 'all', 'data-turbolinks-track' => true
+  = javascript_include_tag "application", 'data-turbolinks-track' => true
+
+%body.common{ :id => params[:action], class: [params[:controller]] }
+  #wrapper
+    #content
+      %nav.navbar.navbar-dark.bg-inverse.navigation_bg
+        = link_to "/", :class => "navbar-brand" do
+          = image_tag "logo.svg", :alt => "social listening team"
+          %span SHIFT MANAGER
+      .container-fluid
+        = yield
