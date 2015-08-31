@@ -1,7 +1,4 @@
-%h1 名前の編集
-
 = render 'form'
 
-= link_to '申請の一覧', @member
-\|
-= link_to 'メンバー一覧へ戻る', members_path
+%div= link_to '申請に戻る', new_shift_request_path(member_id: @member.id)
+%div= link_to 'ホームに戻る', root_path

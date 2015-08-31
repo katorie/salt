@@ -5,9 +5,3 @@
       %ul
         - @member.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = f.label '名前'
-    = f.text_field :name
-
-  .actions
-    = f.submit '保存'
