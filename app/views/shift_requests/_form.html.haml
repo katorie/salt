@@ -18,6 +18,7 @@
         %th 遅番
         %th 泊り
         %th コメント
+        %th
     %tbody
       = f.fields_for :shift_requests do |shift_request_form|
         %tr
@@ -29,6 +30,18 @@
           %td= shift_request_form.radio_button :slot, 1
           %td= shift_request_form.radio_button :slot, 2
           %td= shift_request_form.text_field :comment, size: 30
+          %td= link_to 'Cancel', "#", class: "cancel-button", "data-index" => shift_request_form.index
+
+    :javascript
+      $(function(){
+        $(".cancel-button").on("click", function(event){
+        var dataIndex = $(event.target).data("index")
+        $("#member_shift_requests_attributes_" + dataIndex + "_slot_0").attr("checked",false);
+        $("#member_shift_requests_attributes_" + dataIndex + "_slot_1").attr("checked",false);
+        $("#member_shift_requests_attributes_" + dataIndex + "_slot_2").attr("checked",false);
+        $("#member_shift_requests_attributes_" + dataIndex + "_comment").val('');
+        });
+      });
 
   .actions
     = f.submit 'Save'
