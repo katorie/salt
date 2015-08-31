@@ -5,6 +5,6 @@ module MembersHelper
   end
 
   def admin?
-    session[:login] == '足立'
+    session[:login] == 'Administrator'
   end
 end
