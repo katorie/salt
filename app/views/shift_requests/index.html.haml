@@ -9,6 +9,8 @@
         %th 名前
         %th 日時
         %th シフト
+        %th 開始時間
+        %th 終了時間
         %th コメント
 
     %tbody
@@ -17,8 +19,10 @@
           %td= shift_request.member.name
           %td= shift_request.date
           %td= shift_request.slot
+          %td= shift_request.start_time.strftime('%H:%M')
+          %td= shift_request.end_time.strftime('%H:%M')
           %td= shift_request.comment
 
 - else
-  %p 管理者が閲覧できるページです。あなたは管理者なので閲覧できません！
+  %p 管理者が閲覧できるページです。あなたは管理者ではないので閲覧できません！
   %p= link_to 'トップページ', root_path

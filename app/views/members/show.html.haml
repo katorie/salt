@@ -12,12 +12,16 @@
     %tr
       %th 日付
       %th シフト
+      %th 開始時間
+      %th 終了時間
       %th コメント
   %tbody
     - @shift_requests.each do |shift_request|
       %tr
         %td= shift_request.date
         %td= shift_request.slot
+        %td= shift_request.start_time.strftime('%H:%M')
+        %td= shift_request.end_time.strftime('%H:%M')
         %td= shift_request.comment
 
 - if admin?

@@ -22,10 +22,10 @@ class ShiftRequest < ActiveRecord::Base
   end
 
   def self.csv_column_names
-    ['名前', '日付', 'シフト', 'コメント']
+    ['名前', '日付', 'シフト', '開始時間', '終了時間', 'コメント']
   end
 
   def csv_column_values
-    [member.name, date, slot, comment]
+    [member.name, date, slot, start_time.strftime('%H:%M'), end_time.strftime('%H:%M'), comment]
   end
 end

@@ -13,10 +13,12 @@
     %thead
       %tr
         %th 日付
-        /%th 曜日
-        %th 早番
-        %th 遅番
-        %th 泊り
+        %th 曜日
+        %th 早番（10:00〜19:00）
+        %th 遅番（13:00〜22:00）
+        %th 泊り（22:00〜10:00）
+        %th 開始時間
+        %th 終了時間
         %th コメント
         %th
     %tbody
@@ -25,10 +27,12 @@
           - shift_request_form.text_field :member_id, value: @member.id
           - request_day = @request_days.to_a[shift_request_form.index]
           %td= shift_request_form.date_field :date, value: request_day, readonly: true
-          /%td= request_day.strftime("#{%w(日 月 火 水 木 金 土)[request_day.wday]}")
+          %td= request_day.strftime("#{%w(日 月 火 水 木 金 土)[request_day.wday]}")
           %td= shift_request_form.radio_button :slot, 0
           %td= shift_request_form.radio_button :slot, 1
           %td= shift_request_form.radio_button :slot, 2
+          %td= shift_request_form.time_select :start_time, minute_step: 30, include_blank: true
+          %td= shift_request_form.time_select :end_time, minute_step: 30, include_blank: true
           %td= shift_request_form.text_field :comment, size: 30
           %td= link_to 'Cancel', "#", class: "cancel-button", "data-index" => shift_request_form.index
 
