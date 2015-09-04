@@ -1,1 +1,7 @@
 Member.create(name: 'Administrator', id: 1)
+Member.create(name: '足立', id: 2)
+Member.create(name: '山下', id: 3)
+Member.create(name: '高瀬', id: 4)
+Member.create(name: '深澤', id: 5)
+Member.create(name: '米山', id: 6)
+Member.create(name: '榎本', id: 7)
