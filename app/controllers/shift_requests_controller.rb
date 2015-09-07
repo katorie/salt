@@ -8,8 +8,8 @@ class ShiftRequestsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { send_data @shift_requests.to_csv }
-      format.xls { send_data @shift_requests.to_csv(col_sep: "\t") }
+      format.csv { send_data @shift_requests.to_csv, type: 'text/csv; charset=shift_jis' }
+      format.xls { send_data @shift_requests.to_csv(col_sep: "\t"), type: 'text/csv; charset=shift_jis' }
     end
   end
 
