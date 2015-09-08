@@ -13,12 +13,13 @@ class ShiftRequest < ActiveRecord::Base
   end
 
   def self.to_csv(options = {})
-    CSV.generate(options) do |csv|
+    csv_data = CSV.generate(options) do |csv|
       csv << csv_column_names
       all.each do |shift_request|
         csv << shift_request.csv_column_values
       end
     end
+    csv_data.encode(Encoding::SJIS)
   end
 
   def self.csv_column_names
