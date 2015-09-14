@@ -9,43 +9,56 @@
   %p= "#{@request_month.month}月のシフト"
   %p= @member.name
 
-  %table
-    %thead
+  .table-responsive
+    %table.table
       %tr
-        %th 日付
-        %th 曜日
-        %th 早番（10:00〜19:00）
-        %th 遅番（13:00〜22:00）
-        %th 泊り（22:00〜10:00）
-        %th 開始時間
-        %th 終了時間
-        %th コメント
         %th
-    %tbody
-      = f.fields_for :shift_requests do |shift_request_form|
-        %tr
+        = f.fields_for :shift_requests do |shift_request_form|
           - shift_request_form.text_field :member_id, value: @member.id
           - request_day = @request_days.to_a[shift_request_form.index]
-          %td= shift_request_form.date_field :date, value: request_day, readonly: true
-          %td= request_day.strftime("#{%w(日 月 火 水 木 金 土)[request_day.wday]}")
-          %td= shift_request_form.radio_button :slot, 0
-          %td= shift_request_form.radio_button :slot, 1
-          %td= shift_request_form.radio_button :slot, 2
-          %td= shift_request_form.time_select :start_time, minute_step: 30, include_blank: true
-          %td= shift_request_form.time_select :end_time, minute_step: 30, include_blank: true
-          %td= shift_request_form.text_field :comment, size: 30
-          %td= link_to 'Cancel', "#", class: "cancel-button", "data-index" => shift_request_form.index
+          %th= shift_request_form.date_field :date, value: request_day, readonly: true
 
-    :javascript
-      $(function(){
-        $(".cancel-button").on("click", function(event){
-        var dataIndex = $(event.target).data("index")
-        $("#member_shift_requests_attributes_" + dataIndex + "_slot_0").attr("checked",false);
-        $("#member_shift_requests_attributes_" + dataIndex + "_slot_1").attr("checked",false);
-        $("#member_shift_requests_attributes_" + dataIndex + "_slot_2").attr("checked",false);
-        $("#member_shift_requests_attributes_" + dataIndex + "_comment").val('');
+      %tbody
+        %tr
+          %th 早番（10:00〜19:00）
+          = f.fields_for :shift_requests do |shift_request_form|
+            %td= shift_request_form.radio_button :slot, 0
+        %tr
+          %th 遅番（13:00〜22:00）
+          = f.fields_for :shift_requests do |shift_request_form|
+            %td= shift_request_form.radio_button :slot, 1
+        %tr
+          %th 泊り（22:00〜10:00）
+          = f.fields_for :shift_requests do |shift_request_form|
+            %td= shift_request_form.radio_button :slot, 2
+        %tr
+          %th 開始時間
+          = f.fields_for :shift_requests do |shift_request_form|
+            %td= shift_request_form.time_select :start_time, minute_step: 30, include_blank: true
+        %tr
+          %th 終了時間
+          = f.fields_for :shift_requests do |shift_request_form|
+            %td= shift_request_form.time_select :end_time, minute_step: 30, include_blank: true
+        %tr
+          %th コメント
+          = f.fields_for :shift_requests do |shift_request_form|
+            %td= shift_request_form.text_field :comment, size: 30
+        %tr
+          %th キャンセル
+          = f.fields_for :shift_requests do |shift_request_form|
+            %td= link_to 'Cancel', "#", class: "cancel-button", "data-index" => shift_request_form.index
+
+      :javascript
+        $(function(){
+          $(".cancel-button").on("click", function(event){
+          var dataIndex = $(event.target).data("index")
+          $("#member_shift_requests_attributes_" + dataIndex + "_slot_0").attr("checked",false);
+          $("#member_shift_requests_attributes_" + dataIndex + "_slot_1").attr("checked",false);
+          $("#member_shift_requests_attributes_" + dataIndex + "_slot_2").attr("checked",false);
+          $("#member_shift_requests_attributes_" + dataIndex + "_comment").val('');
+          });
         });
-      });
+
 
   .actions
     = f.submit 'Save'
