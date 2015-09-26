@@ -10,4 +10,10 @@ class MemberTest < ActiveSupport::TestCase
     member = Member.new(name: ' ')
     assert member.invalid?
   end
+
+  test "Name should be uniqueness" do
+    member = FactoryGirl.create(:member)
+    member2 = member.dup
+    assert member2.invalid?
+  end
 end
