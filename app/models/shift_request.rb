@@ -27,6 +27,6 @@ class ShiftRequest < ActiveRecord::Base
   end
 
   def csv_column_values
-    [member.name, date, slot, start_time.strftime('%H:%M'), end_time.strftime('%H:%M'), comment]
+    [member.name, date, slot, start_time, end_time, comment]
   end
 end
