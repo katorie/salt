@@ -11,15 +11,15 @@
 - if admin?
   %h1 メンバー一覧（管理者のみ）
 
-  %table
-    %thead
-      %tr
-        %th ID
-        %th 名前
-
-    %tbody
-      - @members.each do |member|
+  .table-responsive
+    %table
+      %thead
         %tr
-          %td= member.id
-          %td= member.name
-  = link_to '申請一覧（ダウンロード）', shift_requests_path
+          %th ID
+          %th 名前
+      %tbody
+        - @members.each do |member|
+          %tr
+            %td= member.id
+            %td= member.name
+  = link_to '申請一覧（ダウンロード）', shift_requests_path, class: "btn"
