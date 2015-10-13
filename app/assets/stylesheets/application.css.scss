@@ -55,20 +55,33 @@ body {
   form input {
     background-color: #EEF0F1;
   }
-  table {
-    width: 100%;
-    margin: 0 0 20px;
-    border-left: solid 1px #C8CDD0;
-    border-top: solid 1px #C8CDD0 !important;
-    tr {
+
+
+  .table-responsive {
+    table {
+      width: 100%;
+      margin: 10px 0 20px;
+      white-space: nowrap;
+      border-left: solid 1px #C8CDD0;
+      border-top: solid 1px #C8CDD0;
+      thead {
+        th {
+          border-bottom: solid 1px #C8CDD0 !important;
+        }
+      }
       th {
         padding: 4px;
+        padding: 5px;
+        text-align: center;
+        border-top: none !important;
         border-right: solid 1px #C8CDD0;
         border-bottom: solid 1px #C8CDD0;
         background-color: #EEF0F1;
       }
       td {
         padding: 4px;
+        padding: 5px;
+        border-top: none !important;
         border-right: solid 1px #C8CDD0;
         border-bottom: solid 1px #C8CDD0;
       }
