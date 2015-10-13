@@ -44,8 +44,8 @@
         %tr
           - shift_request_form.text_field :member_id, value: @member.id
           - request_day = @request_days.to_a[shift_request_form.index]
-          %td= shift_request_form.date_field :date, value: request_day, readonly: true, class: ("holiday" if weekend?(request_day))
-          %td= request_day.strftime("#{%w(日 月 火 水 木 金 土)[request_day.wday]}")
+          %td= shift_request_form.date_field :date, value: request_day, readonly: true, class: ("holiday" if holiday?(request_day))
+          %td= label_tag request_day.strftime("#{%w(日 月 火 水 木 金 土)[request_day.wday]}"), nil, class: ("holiday" if holiday?(request_day))
           %td= shift_request_form.radio_button :slot, 0, class: "slot-0", "data-index" => shift_request_form.index
           %td= shift_request_form.radio_button :slot, 1, class: "slot-1", "data-index" => shift_request_form.index
           %td= shift_request_form.radio_button :slot, 2, class: "slot-2", "data-index" => shift_request_form.index
