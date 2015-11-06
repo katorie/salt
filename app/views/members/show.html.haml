@@ -7,23 +7,25 @@
 %p= link_to "申請したシフトの編集", '#' unless applied_next_month?(@member)
 
 %h1 申請したシフトの一覧
-%table
-  %thead
-    %tr
-      %th 日付
-      %th シフト
-      %th 開始時間
-      %th 終了時間
-      %th コメント
-  %tbody
-    - @shift_requests.each do |shift_request|
+
+.table-responsive
+  %table.table
+    %thead
       %tr
-        %td= shift_request.date
-        %td= shift_request.slot
-        %td= shift_request.start_time
-        %td= shift_request.end_time
-        %td= shift_request.comment
+        %th 日付
+        %th シフト
+        %th 開始時間
+        %th 終了時間
+        %th コメント
+    %tbody
+      - @shift_requests.each do |shift_request|
+        %tr
+          %td= shift_request.date
+          %td= shift_request.slot
+          %td= shift_request.start_time
+          %td= shift_request.end_time
+          %td= shift_request.comment
 
 - if admin?
-  = link_to 'メンバー一覧', members_path
-  = link_to '申請一覧（ダウンロード）', shift_requests_path
+  = link_to 'メンバー一覧', members_path, class: "btn"
+  = link_to '申請一覧（ダウンロード）', shift_requests_path, class: "btn"
