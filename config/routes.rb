@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :members
-  resources :shift_requests, only: %i(index new)
+  resources :shift_requests
 
   root 'members#index'
   post '/' => 'members#index'

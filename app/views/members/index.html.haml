@@ -2,11 +2,11 @@
 - unless session[:login]
   = form_tag('/') do
     = text_field_tag :name
-    = submit_tag 'ログイン'
+    = submit_tag 'ログイン', class: "btn"
 - else
-  =link_to 'シフト申請', member_path(@member.id)
+  =link_to 'シフト申請', member_path(@member.id), class: "btn"
   = form_tag('/logout') do
-    = submit_tag 'ログアウト'
+    = submit_tag 'ログアウト', class: "btn"
 
 - if admin?
   %h1 メンバー一覧（管理者のみ）

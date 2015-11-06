@@ -1,7 +1,20 @@
-%h1 Editing shift_request
+%h1 #{@shift_request.date}のシフトの編集
 
-= render 'form'
+= form_for @shift_request, url: { action: :update } do |f|
+  .table-responsive
+    %table
+      %thead
+        %tr
+          %th シフト
+          %th 開始時間
+          %th 終了時間
+          %th コメント
 
-= link_to 'Show', @shift_request
-\|
-= link_to 'Back', shift_requests_path
+      %tbody
+        %tr
+          %td= f.select :slot, ShiftRequest.all.collect {|s| s.slot }.compact.uniq, include_blank: false
+          %td= f.text_field :start_time
+          %td= f.text_field :end_time
+          %td= f.text_field :comment
+    .actions
+      = f.submit 'Save'
