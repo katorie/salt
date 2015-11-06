@@ -9,7 +9,6 @@
   %p= "#{@request_month.month}月のシフト"
   %p= @member.name
 
-
   .table-responsive
     %table.table
       %thead
@@ -29,6 +28,19 @@
           %td 泊り（22:00〜10:00）
           %td 泊り（22:00〜10:00）
 
+  .table-responsive
+    %table.table
+      %thead
+        %tr
+          %th 日付
+          %th 曜日
+          %th 早番
+          %th 遅番
+          %th 泊り
+          %th 開始時間
+          %th 終了時間
+          %th コメント
+          %th
       %tbody
         = f.fields_for :shift_requests do |shift_request_form|
           %tr
