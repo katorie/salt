@@ -3,7 +3,7 @@
   = form_tag('/logout') do
     = submit_tag 'ログアウト', class: "btn"
 
-%p= link_to "シフトを申請する(来月)", new_shift_request_path(member_id: @member.id), class: "btn" if applied_next_month?(@member)
+%p= link_to "来月のシフトの申請・修正", new_shift_request_path(member_id: @member.id), class: "btn" if applied_next_month?(@member)
 /%p= link_to "申請したシフトの編集", '#' unless applied_next_month?(@member)
 
 %h1 申請したシフトの一覧
