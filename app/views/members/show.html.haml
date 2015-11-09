@@ -1,15 +1,14 @@
 %p= @member.name
 -if session[:login]
   = form_tag('/logout') do
-    = submit_tag 'ログアウト'
+    = submit_tag 'ログアウト', class: "btn"
 
-%p= link_to "シフトを申請する(来月)", new_shift_request_path(member_id: @member.id) if applied_next_month?(@member)
-%p= link_to "申請したシフトの編集", '#' unless applied_next_month?(@member)
+%p= link_to "シフトを申請する(来月)", new_shift_request_path(member_id: @member.id), class: "btn" if applied_next_month?(@member)
+/%p= link_to "申請したシフトの編集", '#' unless applied_next_month?(@member)
 
 %h1 申請したシフトの一覧
-
 .table-responsive
-  %table.table
+  %table
     %thead
       %tr
         %th 日付
@@ -17,6 +16,8 @@
         %th 開始時間
         %th 終了時間
         %th コメント
+        %th
+        %th
     %tbody
       - @shift_requests.each do |shift_request|
         %tr
@@ -25,6 +26,8 @@
           %td= shift_request.start_time
           %td= shift_request.end_time
           %td= shift_request.comment
+          %td= link_to '編集', edit_shift_request_path(shift_request.id)
+          %td= link_to '削除', shift_request_path(shift_request.id), data: { confirm: '削除していいですか？' }, method: :delete
 
 - if admin?
   = link_to 'メンバー一覧', members_path, class: "btn"

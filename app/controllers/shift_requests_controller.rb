@@ -1,5 +1,6 @@
 class ShiftRequestsController < ApplicationController
   before_action :set_shift_request, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery except: [:destroy]
 
   # GET /shift_requests
   # GET /shift_requests.json
@@ -56,7 +57,7 @@ class ShiftRequestsController < ApplicationController
   def update
     respond_to do |format|
       if @shift_request.update(shift_request_params)
-        format.html { redirect_to @shift_request, notice: 'Shift request was successfully updated.' }
+        format.html { redirect_to member_path(@shift_request.member_id), notice: 'シフトを更新しました。' }
         format.json { render :show, status: :ok, location: @shift_request }
       else
         format.html { render :edit }
@@ -70,7 +71,7 @@ class ShiftRequestsController < ApplicationController
   def destroy
     @shift_request.destroy
     respond_to do |format|
-      format.html { redirect_to shift_requests_url, notice: 'Shift request was successfully destroyed.' }
+      format.html { redirect_to member_url(@shift_request.member_id), notice: '削除されました。'}
       format.json { head :no_content }
     end
   end
