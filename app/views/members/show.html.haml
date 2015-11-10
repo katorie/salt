@@ -21,7 +21,7 @@
     %tbody
       - @shift_requests.each do |shift_request|
         %tr
-          %td= shift_request.date
+          %td= shift_request.date.strftime('%m/%d')
           %td= shift_request.slot
           %td= shift_request.start_time
           %td= shift_request.end_time
