@@ -1,5 +1,5 @@
 class ShiftRequestsController < ApplicationController
-  before_action :set_shift_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_shift_request, only: [:show, :update, :destroy]
   protect_from_forgery except: [:destroy]
 
   # GET /shift_requests
@@ -34,6 +34,11 @@ class ShiftRequestsController < ApplicationController
 
   # GET /shift_requests/1/edit
   def edit
+    # TODO: params[:id] から年・月をセット
+    @member = Member.find(params[:member_id])
+    year = params[:id][0..3]
+    month = params[:id][4..5]
+    @form = ShiftRequestsForm.new(year: year, month: month, member: @member)
   end
 
   # POST /shift_requests
@@ -55,6 +60,13 @@ class ShiftRequestsController < ApplicationController
   # PATCH/PUT /shift_requests/1
   # PATCH/PUT /shift_requests/1.json
   def update
+    @form = ShiftRequestsForm.new(shift_requests_params)
+    if @form.save
+      redirect_to root_path
+    else
+      render 'edit'
+    end
+
     respond_to do |format|
       if @shift_request.update(shift_request_params)
         format.html { redirect_to member_path(@shift_request.member_id), notice: 'シフトを更新しました。' }
