@@ -10,7 +10,9 @@ class ShiftRequestsForm
   def initialize(args)
     super
     # TODO: ユーザから入力値が与えられていない場合はすでに入力済みのこの年月を対象とした shift_requests を DB から取得 (更新用にフォームに現在値を入れておく用)
-    self.shift_requests = member.shift_requests.where(date: Date.new(year, month).all_month)
+    shift_requests = Date.new(year, month).all_month.map do |date|
+      member.shift_requests.where(date: Date.new(year, month).all_month).find { |request| request.date == date } || member.shift_requests.build(date: date)
+    end
   end
 
   def save

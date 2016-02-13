@@ -1,1 +1,5 @@
 %h1 シフトの編集
+
+= form_for @member, url: member_shift_request_path(@member, Date.today.next_month.strftime('%Y%m')), html: { method: :put } do |f|
+  = f.fields_for :shift_requests do |sr_f|
+    = sr_f.text_field :date
