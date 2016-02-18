@@ -1,20 +1,58 @@
-%h1 #{@shift_request.date}のシフトの編集
+%h1 シフトの編集
 
-= form_for @shift_request, url: { action: :update } do |f|
+= form_for @member, url: member_shift_request_path(@member, Date.today.next_month.strftime('%Y%m')), html: { method: :put } do |f|
+  %p= "#{@request_month.month}月のシフト"
+  %p= @member.name
+
   .table-responsive
-    %table
+    %table.table
       %thead
         %tr
-          %th シフト
+          %th 平日
+          %th 土日祝
+      %tbody
+        %tr
+          %td 早番（10:00〜19:00）
+          %td 早番（10:00〜16:00）
+      %tbody
+        %tr
+          %td 遅番（13:00〜22:00）
+          %td 遅番（16:00〜22:00）
+      %tbody
+        %tr
+          %td 泊り（22:00〜10:00）
+          %td 泊り（22:00〜10:00）
+
+  .table-responsive
+    %table.table
+      %thead
+        %tr
+          %th 日付
+          %th 曜日
+          %th 早番
+          %th 遅番
+          %th 泊り
+          %th
           %th 開始時間
           %th 終了時間
           %th コメント
-
       %tbody
-        %tr
-          %td= f.select :slot, ShiftRequest.all.collect {|s| s.slot }.compact.uniq, include_blank: false
-          %td= f.text_field :start_time
-          %td= f.text_field :end_time
-          %td= f.text_field :comment
-    .actions
-      = f.submit 'Save'
+        = f.fields_for :shift_requests do |shift_request_form|
+          %tr
+            - request_day = shift_request_form.object.date
+            %td
+              = label_tag request_day.strftime('%m/%d'), nil, class: ("holiday" if holiday?(request_day))
+            %td
+              = label_tag request_day.strftime("#{%w(日 月 火 水 木 金 土)[request_day.wday]}"), nil, class: ("holiday" if holiday?(request_day))
+            %td= shift_request_form.radio_button :slot, 0, class: "slot-0", "data-index" => shift_request_form.index
+            %td= shift_request_form.radio_button :slot, 1, class: "slot-1", "data-index" => shift_request_form.index
+            %td= shift_request_form.radio_button :slot, 2, class: "slot-2", "data-index" => shift_request_form.index
+            %td= link_to 'Cancel', "#", class: "cancel-button", "data-index" => shift_request_form.index
+            %td= shift_request_form.select :start_time, @time_select, include_blank: true
+            %td= shift_request_form.select :end_time, @time_select, include_blank: true
+            %td= shift_request_form.text_field :comment, size: 30
+
+
+  .actions
+    = f.submit 'Save'
+

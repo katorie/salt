@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'haml-rails'
 gem 'react-rails', '~> 1.1.0'
+gem 'virtus'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-react-bootstrap'

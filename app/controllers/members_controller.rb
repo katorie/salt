@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_action :set_member, only: [:show, :edit, :update, :destroy]
+  before_action :set_member, only: [:edit, :update, :destroy]
 
   # GET /members
   # GET /members.json
@@ -10,24 +10,17 @@ class MembersController < ApplicationController
       @msg = session[:login] + 'でログイン中です'
       @member = Member.find_by(name: session[:login])
     end
-
-    if params.key?(:name)
-      member = Member.find_by(name: params[:name])
-      if member
-        session[:login] = params[:name]
-        redirect_to member_path(member.id)
-      else
-        session[:login] = nil
-        @msg = '名前が間違っています'
-      end
-    end
   end
 
   # GET /members/1
   # GET /members/1.json
   def show
-    @member = Member.find(params[:id])
-    @shift_requests = @member.shift_requests
+    if session[:login]
+      @member = Member.find_by(name: session[:login])
+      @shift_requests = @member.shift_requests.where(date: Date.today.next_month.all_month)
+    else
+      redirect_to new_session_path
+    end
   end
 
   # GET /members/new
@@ -77,11 +70,6 @@ class MembersController < ApplicationController
       format.html { redirect_to members_url, notice: 'Member was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def logout
-    session[:login] = nil
-    redirect_to root_url
   end
 
   private

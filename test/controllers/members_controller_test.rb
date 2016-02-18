@@ -23,6 +23,7 @@ class MembersControllerTest < ActionController::TestCase
   end
 
   test "should show member" do
+    session[:login] = @member.name
     get :show, id: @member
     assert_response :success
   end

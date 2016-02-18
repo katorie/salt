@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  resources :members
-  resources :shift_requests
+  resources :members do
+    resources :shift_requests
+  end
+  resources :sessions
 
-  root 'members#index'
-  post '/' => 'members#index'
-  post '/logout' => 'members#logout'
+  root 'members#show'
+  post '/logout' => 'sessions#logout'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

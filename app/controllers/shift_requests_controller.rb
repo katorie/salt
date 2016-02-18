@@ -1,5 +1,5 @@
 class ShiftRequestsController < ApplicationController
-  before_action :set_shift_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_shift_request, only: [:show, :update, :destroy]
   protect_from_forgery except: [:destroy]
 
   # GET /shift_requests
@@ -34,6 +34,17 @@ class ShiftRequestsController < ApplicationController
 
   # GET /shift_requests/1/edit
   def edit
+    # TODO: params[:id] から年・月をセット
+    @member = Member.find(params[:member_id])
+    year = params[:id][0..3]
+    month = params[:id][4..5]
+    @form = ShiftRequestsForm.new(year: year, month: month, member: @member)
+    @request_month = Date.new(year.to_i, month.to_i)
+    @request_days = @request_month.all_month
+    @request_days.count.times { @member.shift_requests.build }
+    # Where should we write this array?
+    @time_select = %w(1000 1030 1100 1130 1200 1230 1300 1330 1400 1430 1500 1530 1600 1630 1700 1730 1800 1830 1900 1930 2000 2030 2100 2130 2200 2230 2300 2330 0000 0030 0100 0130 0200 0230 0300 0330 0400 0430 0500 0530 0600 0630 0700 0730 0800 0830 0900 0930)
+    @national_holidays = HolidayJp.between(@request_days.to_a[0], @request_days.to_a[-1])
   end
 
   # POST /shift_requests
@@ -55,6 +66,13 @@ class ShiftRequestsController < ApplicationController
   # PATCH/PUT /shift_requests/1
   # PATCH/PUT /shift_requests/1.json
   def update
+    @form = ShiftRequestsForm.new(shift_requests_params)
+    if @form.save
+      redirect_to root_path
+    else
+      render 'edit'
+    end
+
     respond_to do |format|
       if @shift_request.update(shift_request_params)
         format.html { redirect_to member_path(@shift_request.member_id), notice: 'シフトを更新しました。' }
