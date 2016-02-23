@@ -3,31 +3,32 @@
   = form_tag('/logout') do
     = submit_tag 'ログアウト', class: "btn"
 
-%p= link_to "来月のシフトの申請", new_member_shift_request_path(member_id: @member.id), class: "btn" if applied_next_month?(@member)
-%p= link_to "来月のシフトの編集", edit_member_shift_request_path(@member, Date.today.next_month.strftime('%Y%m')), class: "btn"  unless applied_next_month?(@member)
+= link_to '来月のシフトの申請', new_member_shift_request_path(member_id: @member.id), class: "btn" if applied_next_month?(@member)
+= link_to '来月のシフトの編集', edit_member_shift_request_path(@member, Date.today.next_month.strftime('%Y%m')), class: "btn"  unless applied_next_month?(@member)
 
-%h1 申請したシフトの一覧
-.table-responsive
-  %table
-    %thead
-      %tr
-        %th 日付
-        %th シフト
-        %th 開始時間
-        %th 終了時間
-        %th コメント
-        -#%th
-        -#%th
-    %tbody
-      - @shift_requests.each do |shift_request|
+- if @shift_requests.exists?
+  %h1 申請したシフトの一覧
+  .table-responsive
+    %table
+      %thead
         %tr
-          %td= shift_request.date.strftime('%m/%d')
-          %td= shift_request.slot
-          %td= shift_request.start_time
-          %td= shift_request.end_time
-          %td= shift_request.comment
-          -#%td= link_to '編集', ''
-          -#%td= link_to '削除', '', data: { confirm: '削除していいですか？' }, method: :delete
+          %th 日付
+          %th シフト
+          %th 開始時間
+          %th 終了時間
+          %th コメント
+          %th
+          %th
+      %tbody
+        - @shift_requests.each do |shift_request|
+          %tr
+            %td= shift_request.date.strftime('%m/%d')
+            %td= shift_request.slot
+            %td= shift_request.start_time
+            %td= shift_request.end_time
+            %td= shift_request.comment
+            %td= link_to '編集', ''
+            %td= link_to '削除', '', data: { confirm: '削除していいですか？' }, method: :delete
 
 - if admin?
   = link_to 'メンバー一覧', members_path, class: "btn"
