@@ -1,7 +1,7 @@
 - if admin?
   %h1 全員のシフト一覧（管理者のみ）
-  = link_to "CSV download", shift_requests_path(format: "csv"), class: "btn"
-  = link_to "Excel file download", shift_requests_path(format: "xls"), class: "btn"
+  = link_to "CSV download", member_shift_requests_path(format: "csv"), class: "btn"
+  = link_to "Excel file download", member_shift_requests_path(format: "xls"), class: "btn"
 
   .table-responsive
     %table

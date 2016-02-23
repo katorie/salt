@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :members
-  resources :shift_requests
+  resources :members do
+    resources :shift_requests
+  end
   resources :sessions
 
   root 'members#show'
