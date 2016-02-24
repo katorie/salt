@@ -80,6 +80,6 @@ class MembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      params.require(:member).permit(:name, shift_requests_attributes: [:date, :slot, :comment, :member_id, :start_time, :end_time])
+      params.require(:member).permit(:name, shift_requests_attributes: [:id, :date, :slot, :comment, :member_id, :start_time, :end_time])
     end
 end
