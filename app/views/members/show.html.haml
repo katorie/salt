@@ -6,6 +6,10 @@
 = link_to '来月のシフトの申請', new_member_shift_request_path(member_id: @member.id), class: "btn" if applied_next_month?(@member)
 = link_to 'シフトの追加申請・編集', new_member_shift_request_path(member_id: @member.id), class: "btn" unless applied_next_month?(@member)
 
+- if admin?
+  = link_to 'メンバー一覧', members_path, class: "btn"
+  = link_to '申請一覧（ダウンロード）', member_shift_requests_path(@member), class: "btn"
+
 - if @shift_requests.exists?
   %h1 申請したシフトの一覧
   .table-responsive
@@ -27,7 +31,3 @@
             %td= shift_request.end_time
             %td= shift_request.comment
             %td= link_to '削除', member_shift_request_path(@member, shift_request.id), data: { confirm: '削除していいですか？' }, method: :delete
-
-- if admin?
-  = link_to 'メンバー一覧', members_path, class: "btn"
-  = link_to '申請一覧（ダウンロード）', member_shift_requests_path(@member), class: "btn"
