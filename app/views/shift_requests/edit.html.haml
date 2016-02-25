@@ -5,14 +5,18 @@
     %table
       %thead
         %tr
-          %th シフト
+          %th 早番
+          %th 遅番
+          %th 泊り
           %th 開始時間
           %th 終了時間
           %th コメント
 
       %tbody
         %tr
-          %td= f.select :slot, ShiftRequest.all.collect {|s| s.slot }.compact.uniq, include_blank: false
+          %td= f.radio_button :slot, 0, class: "slot-0", "data-index" => f.index, checked: (true if f.object.slot == '早番')
+          %td= f.radio_button :slot, 1, class: "slot-1", "data-index" => f.index, checked: (true if f.object.slot == '遅番')
+          %td= f.radio_button :slot, 2, class: "slot-2", "data-index" => f.index, checked: (true if f.object.slot == '泊り')
           %td= f.text_field :start_time
           %td= f.text_field :end_time
           %td= f.text_field :comment

@@ -13,6 +13,6 @@
   %strong Comment:
   = @shift_request.comment
 
-= link_to 'Edit', edit_shift_request_path(@shift_request)
+= link_to 'Edit', edit_member_shift_request_path(@shift_request, @member)
 \|
 = link_to 'Back', member_path(@shift_request.member.id)
