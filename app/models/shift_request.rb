@@ -6,6 +6,8 @@ class ShiftRequest < ActiveRecord::Base
 
   default_scope { order(:date) }
 
+  scope :next_month, -> { where(date: Date.today.next_month.all_month) }
+
   def slot= value
     if value.kind_of?(String) and value.to_i.to_s == value
       super value.to_i

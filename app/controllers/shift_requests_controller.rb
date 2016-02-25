@@ -5,7 +5,7 @@ class ShiftRequestsController < ApplicationController
   # GET /shift_requests
   # GET /shift_requests.json
   def index
-    @shift_requests = ShiftRequest.all.includes(:member).order(:member_id).order(:date)
+    @shift_requests = ShiftRequest.next_month.includes(:member).order(:member_id).order(:date)
 
     respond_to do |format|
       format.html
@@ -23,8 +23,7 @@ class ShiftRequestsController < ApplicationController
   def new
     @member = Member.find(params[:member_id])
     @shift_request = ShiftRequest.new
-    today = Date.today
-    @request_month = today.next_month
+    @request_month = Date.today.next_month
     @applied_days = @member.shift_requests.map {|d| d.date }.sort
     @request_days = @request_month.all_month.to_a.delete_if {|d| @applied_days.include?(d) }.sort
     @request_days.count.times { @member.shift_requests.build }
