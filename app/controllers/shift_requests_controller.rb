@@ -5,7 +5,7 @@ class ShiftRequestsController < ApplicationController
   # GET /shift_requests
   # GET /shift_requests.json
   def index
-    @shift_requests = ShiftRequest.next_month.includes(:member).order(:member_id).order(:date)
+    @shift_requests = ShiftRequest.includes(:member).order(:member_id).order(:date)
 
     respond_to do |format|
       format.html

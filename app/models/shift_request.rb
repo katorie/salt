@@ -4,9 +4,7 @@ class ShiftRequest < ActiveRecord::Base
   validates :comment, length: { maximum: 20 }
   enum slot: %i(早番 遅番 泊り 早遅泊)
 
-  default_scope { order(:date) }
-
-  scope :next_month, -> { where(date: Date.today.next_month.all_month) }
+  default_scope { where(date: Date.today.next_month.all_month).order(:date) }
 
   def slot= value
     if value.kind_of?(String) and value.to_i.to_s == value

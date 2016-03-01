@@ -17,7 +17,7 @@ class MembersController < ApplicationController
   def show
     if session[:login]
       @member = Member.find_by(name: session[:login])
-      @shift_requests = @member.shift_requests.next_month
+      @shift_requests = @member.shift_requests
     else
       redirect_to new_session_path
     end
