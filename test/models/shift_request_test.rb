@@ -14,8 +14,8 @@ class ShiftRequestTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::RecordInvalid) { @shift_request.save!}
   end
 
-  test "slot is only 3 patterns" do
-    assert_raises(ArgumentError) { @shift_request.slot = 3 }
+  test "slot is only 4 patterns" do
+    assert_raises(ArgumentError) { @shift_request.slot = 4 }
   end
 
   test "CSV file is encoding Shift-JIS" do
