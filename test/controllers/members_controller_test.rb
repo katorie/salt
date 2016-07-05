@@ -18,7 +18,7 @@ class MembersControllerTest < ActionController::TestCase
 
   test "should create member" do
     assert_difference('Member.count') do
-      post :create, member: { name: "kato" }
+      post :create, member: { name: "kato", code: "999" }
     end
   end
 
@@ -34,7 +34,7 @@ class MembersControllerTest < ActionController::TestCase
   end
 
   test "should update member" do
-    patch :update, id: @member, member: { name: "karasawa" }
+    patch :update, id: @member, member: { name: "karasawa", code: "999" }
     assert_redirected_to member_path(assigns(:member))
   end
 

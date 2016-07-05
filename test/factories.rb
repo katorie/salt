@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :member do
     sequence(:name) {|n| "Member #{n}"}
+    sequence(:code) {|n| "#{n}"}
   end
 
   factory :shift_request do |f|
