@@ -8,7 +8,7 @@ class MembersController < ApplicationController
 
     if session[:login]
       @msg = session[:login] + 'でログイン中です'
-      @member = Member.find_by(name: session[:login])
+      @member = Member.find_by(code: session[:login])
     end
   end
 
@@ -16,7 +16,7 @@ class MembersController < ApplicationController
   # GET /members/1.json
   def show
     if session[:login]
-      @member = Member.find_by(name: session[:login])
+      @member = Member.find_by(code: session[:login])
       @shift_requests = @member.shift_requests
     else
       redirect_to new_session_path

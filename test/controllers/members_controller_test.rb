@@ -3,6 +3,7 @@ require 'test_helper'
 class MembersControllerTest < ActionController::TestCase
   setup do
     @member = members(:one)
+    session[:login] = @member.code
   end
 
   test "should get index" do
@@ -23,7 +24,6 @@ class MembersControllerTest < ActionController::TestCase
   end
 
   test "should show member" do
-    session[:login] = @member.name
     get :show, id: @member
     assert_response :success
   end

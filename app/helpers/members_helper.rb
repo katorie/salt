@@ -5,6 +5,6 @@ module MembersHelper
   end
 
   def admin?
-    session[:login] == 'Administrator'
+    @member.name == 'Administrator'
   end
 end

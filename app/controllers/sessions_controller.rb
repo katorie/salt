@@ -3,14 +3,14 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if params.key? :name
-      member = Member.find_by(name: params[:name])
+    if params.key? :code
+      member = Member.find_by(code: params[:code])
       if member
-        session[:login] = params[:name]
+        session[:login] = params[:code]
         redirect_to member_path member
       else
         session[:login] = nil
-        @msg = '名前が間違っています'
+        @msg = '間違っています'
         render 'new'
       end
     end

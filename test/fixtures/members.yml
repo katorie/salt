@@ -2,6 +2,8 @@
 
 one:
   name: MyString
+  code: 12345
 
 two:
   name: MyString
+  code: 98765
