@@ -76,6 +76,11 @@ class ShiftRequestsController < ApplicationController
     end
   end
 
+  def import
+    ShiftRequest.import(params[:file])
+    redirect_to root_path, notice: 'アップロードしました。'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_shift_request
