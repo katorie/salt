@@ -3,12 +3,16 @@
   = form_tag('/logout') do
     = submit_tag 'ログアウト', class: "btn"
 
-= link_to '来月のシフトの申請', new_member_shift_request_path(member_id: @member.id), class: "btn" if applied_next_month?(@member)
-= link_to 'シフトの追加申請・編集', new_member_shift_request_path(member_id: @member.id), class: "btn" unless applied_next_month?(@member)
-
 - if admin?
   = link_to 'メンバー一覧', members_path, class: "btn"
-  = link_to '申請一覧（ダウンロード）', member_shift_requests_path(@member), class: "btn"
+  = link_to 'ダウンロード', member_shift_requests_path(@member), class: "btn"
+  = form_tag import_member_shift_requests_path(@member), multipart: true do
+    = file_field_tag :file
+    = submit_tag 'アップロード'
+- else
+  = link_to '来月のシフトの申請', new_member_shift_request_path(member_id: @member.id), class: "btn" if applied_next_month?(@member)
+  = link_to 'シフトの追加申請・編集', new_member_shift_request_path(member_id: @member.id), class: "btn" unless applied_next_month?(@member)
+
 
 - if @shift_requests.exists?
   %h1 申請したシフトの一覧
