@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
         redirect_to member_path member
       else
         session[:login] = nil
-        @msg = '間違っています'
+        @msg = 'スタッフコードが間違っています'
         render 'new'
       end
     end

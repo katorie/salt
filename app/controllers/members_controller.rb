@@ -7,7 +7,6 @@ class MembersController < ApplicationController
     @members = Member.all
 
     if session[:login]
-      @msg = session[:login] + 'でログイン中です'
       @member = Member.find_by(code: session[:login])
     end
   end
