@@ -6,9 +6,6 @@
         - @shift_request.errors.full_messages.each do |msg|
           %li= msg
 
-  %p= "#{@request_month.month}月のシフト"
-  %p= @member.name
-
   .table-responsive
     %table.table
       %thead
@@ -62,4 +59,4 @@
 
 
   .actions
-    = f.submit 'Save'
+    = f.submit '申請'
