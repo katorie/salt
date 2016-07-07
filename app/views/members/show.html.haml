@@ -25,7 +25,6 @@
           %th 開始時間
           %th 終了時間
           %th コメント
-          %th
       %tbody
         - @shift_requests.each do |shift_request|
           %tr
@@ -34,4 +33,3 @@
             %td= shift_request.start_time
             %td= shift_request.end_time
             %td= shift_request.comment
-            %td= link_to '削除', member_shift_request_path(@member, shift_request.id), data: { confirm: '削除していいですか？' }, method: :delete
