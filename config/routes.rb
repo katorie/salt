@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :members do
+    collection { post :import }
     resources :shift_requests do
       collection { post :import }
     end
