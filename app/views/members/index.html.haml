@@ -1,15 +1,18 @@
 - if admin?
   %h1 メンバー一覧（管理者のみ）
+  = form_tag import_members_path(@member), multipart: true do
+    = file_field_tag :file
+    = submit_tag 'アップロード'
 
   .table-responsive
     %table
       %thead
         %tr
-          %th ID
+          %th スタッフコード
           %th 名前
       %tbody
         - @members.each do |member|
           %tr
-            %td= member.id
+            %td= member.code
             %td= member.name
   = link_to '申請一覧（ダウンロード）', member_shift_requests_path(@member), class: "btn"
