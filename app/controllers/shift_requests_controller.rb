@@ -6,6 +6,7 @@ class ShiftRequestsController < ApplicationController
   # GET /shift_requests.json
   def index
     @shift_requests = ShiftRequest.includes(:member).order(:member_id).order(:date)
+    @member = Member.find_by(code: session[:login])
 
     respond_to do |format|
       format.html

@@ -7,7 +7,6 @@ $(function(){
         $("#member_shift_requests_attributes_" + dataIndex + "_slot_3").attr("checked",false);
         $("#member_shift_requests_attributes_" + dataIndex + "_start_time").val('');
         $("#member_shift_requests_attributes_" + dataIndex + "_end_time").val('');
-        $("#member_shift_requests_attributes_" + dataIndex + "_comment").val('');
     });
 });
 

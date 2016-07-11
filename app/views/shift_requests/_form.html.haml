@@ -6,9 +6,6 @@
         - @shift_request.errors.full_messages.each do |msg|
           %li= msg
 
-  %p= "#{@request_month.month}月のシフト"
-  %p= @member.name
-
   .table-responsive
     %table.table
       %thead
@@ -38,10 +35,10 @@
           %th 遅番
           %th 泊り
           %th 早遅泊
-          %th
           %th 開始時間
           %th 終了時間
-          %th コメント
+          %th
+          %th コメント（削除・編集・追加した場合はコメントを残してください）
       %tbody
         = f.fields_for :shift_requests do |shift_request_form|
           %tr
@@ -55,11 +52,11 @@
             %td= shift_request_form.radio_button :slot, 1, class: "slot-1", "data-index" => shift_request_form.index, checked: (true if shift_request_form.object.slot == '遅番')
             %td= shift_request_form.radio_button :slot, 2, class: "slot-2", "data-index" => shift_request_form.index, checked: (true if shift_request_form.object.slot == '泊り')
             %td= shift_request_form.radio_button :slot, 3, class: "slot-3", "data-index" => shift_request_form.index, checked: (true if shift_request_form.object.slot == '早遅泊')
-            %td= link_to 'Cancel', "#", class: "cancel-button", "data-index" => shift_request_form.index
             %td= shift_request_form.select :start_time, @time_select, include_blank: true
             %td= shift_request_form.select :end_time, @time_select, include_blank: true
+            %td= link_to '削除', "#", class: "cancel-button", "data-index" => shift_request_form.index
             %td= shift_request_form.text_field :comment, size: 30
 
 
   .actions
-    = f.submit 'Save'
+    = f.submit '申請'
